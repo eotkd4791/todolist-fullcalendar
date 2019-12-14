@@ -1,0 +1,19 @@
+.css-login h1 {
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.css-formlogin {
+    display: block;
+    margin-top: 100px;
+    text-align: center;
+}
+
+.css-formlogin .pw-div {
+    margin-top: 1rem;
+}
+
+.css-formlogin .btn-div {
+    margin-top: 1rem;
+}

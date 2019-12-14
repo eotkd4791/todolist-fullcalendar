@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+    <head>
+        <title>TodoList</title>
+        <meta charset="utf-8">
+        <meta name="author" content="MOD">
+        <meta name="description" content="fullcalendar를 이용하여 ToDoList를 개발했습니다.">
+        <meta name="keywords" content="투두리스트, todolist, fullcalendar, 자바스크립트, javascript">
+
+        <link rel="stylesheet" href="css/index.css" type="text/css">
+        <link href="fullcalendar-4.3.1/packages/core/main.css" rel="stylesheet">
+        <link href="fullcalendar-4.3.1/packages/daygrid/main.css" rel="stylesheet">
+
+        <script src="lib/jquery/dist/jquery.min.js"></script>  
+        <script src="lib//moment/min/moment.min.js"></script>  
+        <script src="fullcalendar-4.3.1/packages/core/main.js"></script>
+        <script src="fullcalendar-4.3.1/packages/core/locales/ko.js"></script>
+        <script src="fullcalendar-4.3.1/packages/daygrid/main.js"></script>
+        <script src="fullcalendar-4.3.1/packages/interaction/main.js"></script>    
+    </head>
+
+    <body>
+        <div class="js-login css-login">
+            <h1>TodoList</h1>
+            <form class="js-formlogin css-formlogin">
+                <div class="id-div">
+                    <input id="id-input" type="text" placeholder="ID를 입력해주세요."/>
+                </div>
+                <div class="pw-div">
+                    <input id="pw-input" type="password" placeholder="PW를 입력해주세요."/>
+                </div>
+                <div class="btn-div">
+                    <input id="login-button" type="button" value="로그인"/>
+                    <input id="signup-button" type="button" value="회원가입"/>
+                </div>
+            </form>
+        </div>
+        
+        <div class="js-toDo css-toDo"></div>
+            <!--
+            <h2 class="js-dateToDo css-dateToDo"></h2>
+    
+            <form class="js-formToDo css-formToDo" id="formIdx">
+                <input type="text" placeholder="Write a todo!" id="inputIdx" autocomplete="off"/>
+            </form>
+            <ul class="css-toDoList" id="listTodo"></ul>
+            -->
+        <div id="calendar"></div>
+        <script src="js/login.js"></script>
+        <script src="js/todo.js"></script>
+        <script src="js/calendar.js"></script>
+        
+    </body>
+</html>

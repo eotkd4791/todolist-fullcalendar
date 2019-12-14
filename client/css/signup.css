@@ -1,0 +1,19 @@
+.css-sginup h1 {
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.css-formsginup {
+    display: block;
+    margin-top: 100px;
+    text-align: center;
+}
+
+.css-formsginup .pw-div {
+    margin-top: 1rem;
+}
+
+.css-formsginup .btn-div {
+    margin-top: 1rem;
+}

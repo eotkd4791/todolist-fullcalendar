@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>회원가입</title>
+    </head>
+    <body>
+        <div class="js-signup css-signup">
+            <h1>회원가입</h1>
+            <form class="js-formsignup css-formsignup">
+                <div class="newid-div">
+                    <input id="id-signup" type="text" placeholder="ID를 입력해주세요."/>
+                    <input id="id-check" type="button" value="중복확인"/>
+                </div>
+                <div class="newpw-div">
+                    <input id="pw-signup" type="password" placeholder="PW를 입력해주세요."/>
+                    <input id="pw-check" type="password" placeholder="PW를 한번 더 입력해주세요."/>
+                    <span id="pw-message" style="color:red">비밀번호가 일치하지 않습니다.</span>
+                </div>
+                <div class="btn-signup">
+                    <input id="btn-createAccount" type="button" value="계정 생성"/>
+                    <input id="btn-return" type="button" value="닫기"/>
+                </div>
+            </form>
+        </div>
+        <script src="js/signup.js"></script>
+    </body>
+</html>
