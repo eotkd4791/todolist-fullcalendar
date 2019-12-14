@@ -1,15 +1,39 @@
 const divSignUp = document.querySelector(".js-signup"),
-    formSignUp = document.querySelector("js-signup"),
-    newId = document.getElementById("id-signup"),
-    newPw = document.getElementById("pw-signup"),
-    matchPw = document.getElementById("pw-message");
+    formSignUp = document.querySelector(".js-formsignup"),
+    newId = document.getElementById("idsignup"),
+    newPw = document.getElementById("pwsignup"),
+    newPwCheck = document.getElementById("pwcheck"),
+    matchPw = document.getElementById("pwmessage");
 
 let allowedId, allowedPw = -1, //-1 = 올바르지 않음, 0 = 중복이나 매칭x, 1 = 올바름
     tempId, tempPw, tempCheckPw;
 
 
-document.getElementById("id-check").addEventListener('click', function(e) {
+function pwMatched() {
+    tempPw = newPw.value;
+    tempCheckPw = newPwCheck.value;
+    
+    if(tempPw !== "" && tempCheckPw !== "") {
+        allowedPw = 0; 
+        if(tempPw === tempCheckPw) {
+            matchPw.textContent='✓'
+            matchPw.setAttribute('style', 'color:green'); 
+            allowedPw = 1;
+        } else {
+            matchPw.textContent='✕';
+            matchPw.setAttribute('style', 'color:red'); 
+            allowedPw = 0;
+        }
+    } else {
+        matchPw.textContent='✕';
+        matchPw.setAttribute('style', 'color:red'); 
+        allowedPw = -1;
+    }
+}
+
+document.getElementById("idcheck").addEventListener('click', function(e) {
     tempId = newId.value;
+    console.log(newId.value);
     if(tempId === "") {
         return alert("아이디를 입력해주세요!");
     }
@@ -32,16 +56,13 @@ document.getElementById("id-check").addEventListener('click', function(e) {
     xhrCheck.send(JSON.stringify({ id: tempId }));
 });
 
-document.getElementById("pw-check").addEventListener("keydown",function(e) {
-    tempPw = newPw.value;
-    tempCheckPw = checkPw.value;
-    if(tempPw !== "" && tempCheckPw !== "") {
-        allowedId = 0; 
+formSignUp.addEventListener("keydown",function(e) {
+    if(e.keyCode===32) { 
+        e.preventDefault();
+        e.target.value='';
+        return alert("공백을 입력할 수 없습니다."); 
     }
-    if(tempPw === tempCheckPw) {
-        matchPw.setAttribute('style', 'color:green'); 
-        allowedPw = 1;
-    }
+    setInterval(pwMatched, 300);
 });
 
 document.getElementById("btn-createAccount").addEventListener('click', function(e) {
@@ -63,6 +84,8 @@ document.getElementById("btn-createAccount").addEventListener('click', function(
         if(xhrSignUp.status === 200 || xhrSignUp.status === 201) {
             console.log("POST 요청 성공!!");
             alert("성공적으로 가입하셨습니다!! 가입하신 ID로 로그인하여 주십시오 :)");
+            init();
+            //창닫기 기능
         }
     }
     const signupObj = {
@@ -75,11 +98,12 @@ document.getElementById("btn-createAccount").addEventListener('click', function(
     init();
 });
 
-document.getElementById("btn-return").addEventListener('click', function(e) { self.close(); });
+document.getElementById("btn-return").addEventListener('click', function(e) { init() });
 
 function init() {
     allowedId, allowedPw = -1;
     tempId, tempPw, tempCheckPw="";
+    matchPw.textContent='✕'
     matchPw.setAttribute('style', 'color:red'); 
-    self.close();
+    window.close();
 }

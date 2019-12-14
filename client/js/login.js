@@ -1,5 +1,5 @@
 const divLogin = document.querySelector(".js-login"),
-    formLogin  = document.querySelector(".js-formlogin"),
+    formLogin  = divLogin.querySelector(".js-formlogin"),
     idLogin    = document.getElementById("id-input"),
     pwLogin    = document.getElementById("pw-input"),
     divToDo    = document.querySelector(".js-toDo");
@@ -73,7 +73,7 @@ document.getElementById("login-button").addEventListener('click', function(e) {
 
 
 document.getElementById("signup-button").addEventListener('click', function(e) {
-    window.open('./signup.html', "회원가입","width=400, height=300, left=100, top=50");
+    window.open('./signup.html', "회원가입","width=550, height=450, left=200, top=100");
 });
 
 function init() {
