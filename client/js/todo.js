@@ -1,31 +1,24 @@
-const toDoForm  = document.querySelector(".js-formToDo"), //일정 생성하는 input요소가 위치하는 form 
+/*const toDoForm  = document.querySelector(".js-formToDo"), //일정 생성하는 input요소가 위치하는 form 
     toDoYMD     = document.querySelector(".js-dateToDo"), //달력에서 선택한 날짜를 보여줄 위치.
     listIdx = document.getElementById("listTodo");       //GET요청으로 받은 투두들을 보여줄 위치.
+*/
 
 /* 선언
 --------------------------------------------------------------*/
 
-function getCurrentDate() {
-    const today_      = new Date();
-    const todayYear   = today_.getFullYear();
-    const todayMonth  = today_.getMonth();
-    const todayDay    = today_.getDate(); 
 
-    SelectedYMD=`${todayYear}-${todayMonth+1}-${todayDay}`;
-    toDoYMD.textContent = SelectedYMD; //달력에서 선택한 날짜
-}
-/* 오늘 날짜를 가져오는 함수
- -------------------------------------------------------------*/
 
 function getToDo() {
+    userId = responseId.id;
     const xhrGet = new XMLHttpRequest(); 
     xhrGet.onload = function () { 
         if(xhrGet.status === 200) {
            console.log("GET 요청 성공 " + xhrGet.responseText);
-            const getPlans = JSON.parse(xhrGet.responseText); 
-            listIdx.innerHTML='';
+            const getPlans = JSON.parse(xhrGet.responseText);
+            const listIdx = document.getElementById("listTodo");
+            listIdx.textContent='';
 
-            
+            if(getPlans===null) { return; }            
             for(let i = 0; i<getPlans.length; i++) {
                 const setList = document.createElement("li");
                 const span = document.createElement("span");
@@ -102,9 +95,8 @@ function getToDo() {
         }
     };
     
-    xhrGet.open('GET','/plan/'+SelectedYMD.replace(/-/gi,""));
-    xhrGet.setRequestHeader('Content-Type', 'application/json');
-    xhrGet.send(JSON.stringify({ id: userId }));
+    xhrGet.open('GET','/plan/'+SelectedYMD.replace(/-/gi,"")+`/${userId}`);
+    xhrGet.send();
 }
 /* GET요청을 진행한다. 버튼 클릭 이벤트 발생시, DELETE || PUT 요청 실행
 ----------------------------------------------------------------------*/
@@ -112,8 +104,6 @@ function getToDo() {
 
 function initToDo() {
     getCurrentDate();
-    dateToDo_.textContent = SelectedYMD;
-    
     getToDo(); 
     document.getElementById("formIdx").addEventListener("submit", function(e){ 
         e.preventDefault();

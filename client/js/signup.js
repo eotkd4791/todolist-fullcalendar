@@ -67,6 +67,7 @@ formSignUp.addEventListener("keydown",function(e) {
 
 document.getElementById("btn-createAccount").addEventListener('click', function(e) {
     if(allowedId === -1) {
+        newId.value='';
         return alert("올바르지 않은 ID입니다.");
     } else if (allowedId === 0) {
         return alert("ID 중복을 확인하여 주십시오.");
@@ -84,21 +85,24 @@ document.getElementById("btn-createAccount").addEventListener('click', function(
         if(xhrSignUp.status === 200 || xhrSignUp.status === 201) {
             console.log("POST 요청 성공!!");
             alert("성공적으로 가입하셨습니다!! 가입하신 ID로 로그인하여 주십시오 :)");
+            
             init();
             //창닫기 기능
+        } else {
+            console.error("POST 요청 실패");
         }
     }
     const signupObj = {
         id : tempId,
         pw : tempPw
     };
-    xhrSignUp.open('POST', '/account/signup'); //url어떻게 보낼껀지 @@
+    xhrSignUp.open('POST', '/account/signup');
     xhrSignUp.setRequestHeader('Content-Type', 'application/json');
     xhrSignUp.send(JSON.stringify(signupObj));
     init();
 });
 
-document.getElementById("btn-return").addEventListener('click', function(e) { init() });
+document.getElementById("btn-return").addEventListener('click', function(e) { init(); });
 
 function init() {
     allowedId, allowedPw = -1;

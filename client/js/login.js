@@ -4,14 +4,14 @@ const divLogin = document.querySelector(".js-login"),
     pwLogin    = document.getElementById("pw-input"),
     divToDo    = document.querySelector(".js-toDo");
 
-let userId;
+
 /* 선언
 ------------------------------------------------------------------*/
 
 
 function createToDo() {
     const dateToDo_ = document.createElement("h2");
-    //dateToDo_.textContent = "0000-00-00";
+    dateToDo_.textContent = "0000-00-00";
     dateToDo_.setAttribute('class','js-dateToDo css-dateToDo');
 
     const formToDo_ = document.createElement("form");
@@ -32,9 +32,8 @@ function createToDo() {
     divToDo.appendChild(dateToDo_);
     divToDo.appendChild(formToDo_);
     divToDo.appendChild(ulToDo_);
-    initToDo();
 }
-/* TodoList 요소 만드는 함수.
+/*TodoList 요소 만드는 함수.
 --------------------------------------------------------------*/
 
 
@@ -45,18 +44,22 @@ document.getElementById("login-button").addEventListener('click', function(e) {
         return alert("PW를 입력해주세요!");
     } else {
         const xhrLogin = new XMLHttpRequest();
+        
         xhrLogin.onload = function() {
             if(xhrLogin.status === 200 || xhrLogin.status === 201) {
                 if(xhrLogin.responseText !== 'null') {
-                    userId = idLogin.value;
-                    divLogin.remove();
-                    createCalendar();
+                    responseId = JSON.parse(xhrLogin.responseText);
+                    userId = resposeId.id;
+                    
+                    divLogin.remove();//
                     createToDo();
+                    createCal(userId);
+                    initToDo();
                 } else {
                     return alert("ID/PW가 일치하지 않습니다.");
                 }
             } else {
-                console.error("GET 요청 실패");
+                console.error("POST 요청 실패");
             }
         }
 

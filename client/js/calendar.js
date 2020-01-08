@@ -1,6 +1,18 @@
-let SelectedYMD;
+let SelectedYMD,userId, responseId;
 
-function createCalendar() {
+function getCurrentDate() {
+    const today_      = new Date();
+    const todayYear   = today_.getFullYear();
+    const todayMonth  = today_.getMonth();
+    const todayDay    = today_.getDate(); 
+
+    SelectedYMD=`${todayYear}-${todayMonth+1}-${todayDay}`;
+    document.querySelector(".js-dateToDo").textContent = SelectedYMD; //달력에서 선택한 날짜
+}
+/* 오늘 날짜를 가져오는 함수
+ -------------------------------------------------------------*/
+
+function createCal() {
     const calendarEl = document.getElementById('calendar');
 
     const calendar = new FullCalendar.Calendar(calendarEl, {
@@ -11,7 +23,7 @@ function createCalendar() {
             console.log(info.date.getDate());
         
             SelectedYMD = info.dateStr;//달력에서 선택한 날짜(String, "YYYY-MM-DD" 형식)
-            toDoYMD.innerHTML = SelectedYMD;
+            document.querySelector(".js-dateToDo").textContent = SelectedYMD;
             getToDo();
            $(".fc-today-button").click(function() {
                 getCurrentDate();
